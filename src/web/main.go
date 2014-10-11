@@ -16,7 +16,7 @@ func main() {
 	fmt.Println("Go")
 	router := mux.NewRouter()
 	homeController := new(controllers.HomeController)
-	router.HandleFunc("/{html}", homeController.Index).Methods("GET")
+	router.HandleFunc("/{view}", homeController.Index).Methods("GET")
 	//route("/", homeController.Index)
 
 	router.Handle("/", router)

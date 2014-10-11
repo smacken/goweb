@@ -3,16 +3,20 @@ package controllers
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	"io"
+	"io/ioutil"
 	"net/http"
 )
 
 type HomeController struct{}
 
 func (controller *HomeController) Index(response http.ResponseWriter, request *http.Request) {
-	vars := mux.Vars(req)
-	html := vars["html"]
-	fmt.Printf(html)
-	res.Header().Set("Content-Type", "text/html")
-	io.WriteString(response, "Hello world")
+	vars := mux.Vars(request)
+	view := vars["view"]
+	fmt.Printf(view)
+	response.Header().Set("Content-Type", "text/html")
+	webpage, err := ioutil.ReadFile("../views/index.html")
+	if err != nil {
+		http.Error(response, fmt.Sprintf("home.html file error %v", err), 500)
+	}
+	fmt.Fprint(response, string(webpage))
 }
