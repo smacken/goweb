@@ -6,7 +6,10 @@ import (
 	"path"
 )
 
-func HomeHandler(res http.ResponseWriter, req *http.Request) {
+type HomeController struct{}
+
+// /
+func (homeController HomeController) Index(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	html := vars["html"]
 	res.Header().Set("Content-Type", "text/html")
