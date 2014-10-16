@@ -7,11 +7,11 @@ type Runner struct {
 
 func (r *Runner) Invoke(buildFile string, tasks []string, parameters map[string]interface{}) {
 	if len(tasks) > 0 {
-		for task := range tasks {
-			InvokeTask(task)
+		for _, task := range tasks {
+			r.InvokeTask(task)
 		}
 	} else {
-		InvokeTask("default")
+		r.InvokeTask("default")
 	}
 
 }
@@ -22,8 +22,8 @@ func (runner *Runner) InvokeTask(name string) {
 		//
 	}
 
-	if len(runner.dependsOn) > 0 {
-		for depend := range runner.dependsOn {
+	if len(currentTask.dependsOn) > 0 {
+		for _, depend := range currentTask.dependsOn {
 			runner.InvokeTask(depend.name)
 		}
 	}
@@ -40,7 +40,7 @@ func (runner *Runner) InvokeTask(name string) {
 }
 
 func (runner *Runner) getTask(name string) *Task {
-	for task := range runner.tasks {
+	for _, task := range runner.tasks {
 		if task.name == name {
 			return task
 		}
