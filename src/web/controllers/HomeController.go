@@ -14,8 +14,7 @@ func (controller *HomeController) Index(response http.ResponseWriter, request *h
 	view := vars["view"]
 	fmt.Printf(view)
 	response.Header().Set("Content-Type", "text/html")
-	//webpage, err := ioutil.ReadFile("../web/views/index.html")
-	webpage, err := ioutil.ReadFile("../web/views/index.html")
+	webpage, err := ioutil.ReadFile("../web/public/index.html")
 	if err != nil {
 		http.Error(response, fmt.Sprintf("index.html file error %v", err), 500)
 	}
