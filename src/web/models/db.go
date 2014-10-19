@@ -1,20 +1,21 @@
 package models
 
 import (
-	"errors"
+	//"errors"
 	"github.com/jinzhu/gorm"
-	_ "github.com/mattn/go-sqlite3"
+	//_ "github.com/mattn/go-sqlite3"
 	"log"
 	"os"
+	"web/config"
 )
 
-var Conn *gorp.DbMap
+//var Conn *gorm.DbMap
 var db gorm.DB
 var err error
 var Logger = log.New(os.Stdout, " ", log.Ldate|log.Ltime|log.Lshortfile)
 
-func Setup() {
-	db, err := gorm.Open("sqlite3", "/tmp/data.db")
+func Setup() error {
+	db, err := gorm.Open("sqlite3", config.Conf.DBPath)
 	db.LogMode(false)
 	db.SetLogger(Logger)
 	if err != nil {

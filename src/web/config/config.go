@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"encoding/json"
@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	DBPath string `json:"dbpath"`
 }
 
 var Conf Config
