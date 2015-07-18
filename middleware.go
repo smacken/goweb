@@ -2,13 +2,15 @@ package main
 
 import (
 	"github.com/codegangsta/negroni"
+	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/rs/cors"
 	"github.com/thoas/stats"
 	"github.com/unrolled/secure"
+	"net/http"
 )
 
 func NewApp() *negroni.Negroni {
-	// middleware
+
 	secureMiddleware := secure.New(secure.Options{
 		//AllowedHosts:          []string{"example.com", "ssl.example.com"},
 		//SSLRedirect:           true,
@@ -32,10 +34,12 @@ func NewApp() *negroni.Negroni {
 	app := negroni.New()
 	app.Use(negroni.NewRecovery())
 	app.Use(negroni.NewLogger())
+	app.Use(gzip.Gzip(gzip.DefaultCompression))
 	//app.Use(negroni.Wrap(api))
 	app.Use(negroni.HandlerFunc(secureMiddleware.HandlerFuncWithNext))
 	app.Use(stats.New())
 	app.Use(corsMiddleware)
+	app.Use(negroni.NewStatic(http.Dir("public")))
 
 	return app
 }

@@ -2,13 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	//"github.com/codegangsta/negroni"
-	//"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	//"github.com/rs/cors"
 	"github.com/thoas/stats"
-	//"github.com/unrolled/secure"
-	//"goweb/controllers"
 	"log"
 	"net/http"
 	"os"

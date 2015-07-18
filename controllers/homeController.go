@@ -7,10 +7,10 @@ import (
 
 // GET "/"
 func HomeHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(res, "Hello %v\n")
+	fmt.Fprintf(res, "Hello \n")
 }
 
 // GET "/"
 func DocsHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(res, "Api reference %v\n")
+	fmt.Fprintf(res, "Api reference \n")
 }
